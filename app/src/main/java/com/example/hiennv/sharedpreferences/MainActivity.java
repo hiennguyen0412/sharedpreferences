@@ -26,14 +26,14 @@ public class MainActivity extends Activity {
         mContext = getApplicationContext();
         tvSelect = this.findViewById(R.id.tv_select);
 
-        final String goods[] = {"Tiếng Việt", "English"};
+        final String languages[] = {"Tiếng Việt", "English"};
         Spinner spin = (Spinner) findViewById(R.id.spinnerLang);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, goods);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, languages);
         adapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
         spin.setAdapter(adapter);
 
-        sharedPreferences = getSharedPreferences("my data" , MODE_PRIVATE);
-        position = sharedPreferences.getInt("position", 0);
+        sharedPreferences = getSharedPreferences("language" , MODE_PRIVATE);
+        position = sharedPreferences.getInt("selected", 0);
         spin.setSelection(position);
         Toast.makeText(mContext, "Vi tri " + position, Toast.LENGTH_SHORT).show();
 
@@ -50,7 +50,7 @@ public class MainActivity extends Activity {
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 position = arg2;
                 editor.clear();
-                editor.putInt("position",position);
+                editor.putInt("selected",position);
                 editor.commit();
 
             }
